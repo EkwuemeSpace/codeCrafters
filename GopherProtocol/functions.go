@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"strings"
 	"unicode"
 )
@@ -64,13 +63,4 @@ func reverseSentence(s string) string {
 		words[i] = reverser(words[i])
 	}
 	return strings.Join(words, " ")
-}
-
-func main() {
-	fmt.Println(ToUpperCase("sentinel is online"))
-	fmt.Println(ToLowerCase("ALERT LEVEL FIVE DETECTED"))
-	fmt.Println(capsFirstLetter("THREAT LEVEL elevated"))
-	fmt.Println(titleCase("a threat in the north"))
-	fmt.Println(snakeCase("Alert! Level 5 detected."))
-	fmt.Println(reverseSentence("Go is fun"))
 }
