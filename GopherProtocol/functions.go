@@ -48,10 +48,29 @@ func snakeCase(s string) string {
 
 }
 
+func reverser(s string) string {
+	r := []rune(strings.TrimSpace(s))
+
+	for i, j := 0, len(r)-1; i < j; i, j = i+1, j-1 {
+		r[i], r[j] = r[j], r[i]
+	}
+	return string(r)
+}
+
+func reverseSentence(s string) string {
+	words := strings.Fields(s)
+
+	for i := 0; i < len(words)-1; i++ {
+		words[i] = reverser(words[i])
+	}
+	return strings.Join(words, " ")
+}
+
 func main() {
 	fmt.Println(ToUpperCase("sentinel is online"))
 	fmt.Println(ToLowerCase("ALERT LEVEL FIVE DETECTED"))
 	fmt.Println(capsFirstLetter("THREAT LEVEL elevated"))
 	fmt.Println(titleCase("a threat in the north"))
 	fmt.Println(snakeCase("Alert! Level 5 detected."))
+	fmt.Println(reverseSentence("Go is fun"))
 }
