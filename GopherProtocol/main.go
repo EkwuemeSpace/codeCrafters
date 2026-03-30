@@ -1,59 +1,81 @@
 package main
-import "fmt"
-import "bufio"
-import "os"
-import "strings"
 
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strings"
+)
 
-func formatter(){
-	scanner:=bufio.NewScanner(os.Stdin)
+func formatter() {
+	scanner := bufio.NewScanner(os.Stdin)
 	fmt.Println("WELCOME! THIS IS A STRING FORMATTER CLI")
 	fmt.Println()
-	initial:
-	fmt.Println("Our Operators are: \n-lower <text>\n-cap <text>\n-title <text>\n-snake <text>\n-reverse <text>\n-exit ")
+
+initial:
+	fmt.Println("Our Operators are: \n-upper <text> \n-lower <text>\n-cap <text>\n-title <text>\n-snake <text>\n-reverse <text>\n-exit ")
 	fmt.Println()
 	fmt.Println("choose an operator!")
 	scanner.Scan()
-	input:=scanner.Text()
-	input=strings.TrimSpace(input)
-	parts:=strings.SplitN(input, " ", 2)
-	operation:=parts[0]
-	var text string
-	if len(parts)==2{
-		text=parts[1]
-		words:=strings.Fields(text)
-		text=strings.Join(words, " ")
+
+	input := scanner.Text()
+	input = strings.TrimSpace(input)
+
+	parts := strings.SplitN(input, " ", 2)
+	operation := parts[0]
+	operation = strings.ToLower(string(operation))
+
+	if operation == "exit" {
+		fmt.Println("Shutting down please wait...")
+		fmt.Println("see you soon buddy!")
+		return
 	}
-	if len(parts)!=2{
-		fmt.Println("✗ No text provided. Usage: "+operation+ " <text>")
+
+	var text string
+	if len(parts) == 2 {
+		text = parts[1]
+		words := strings.Fields(text)
+		text = strings.Join(words, " ")
+	}
+
+	if len(parts) != 2 {
+		fmt.Println("✗ No text provided. Usage: "+"operation", "+", "<text>")
 		fmt.Println()
 		goto initial
-		
 	}
-	
-	switch operation{
+
+	switch operation {
 	case "cap":
+		fmt.Println(titleCase(text))
+		fmt.Println()
+		goto initial
+	case "upper":
 		fmt.Println(ToUpperCase(text))
+		fmt.Println()
+		goto initial
 	case "lower":
 		fmt.Println(ToLowerCase(text))
+		fmt.Println()
+		goto initial
 	case "title":
 		fmt.Println(capsFirstLetter(text))
+		fmt.Println()
+		goto initial
 	case "snake":
 		fmt.Println(snakeCase(text))
+		fmt.Println()
+		goto initial
 	case "reverse":
 		fmt.Println(reverseSentence(text))
-	case "exit":
-		fmt.Println("shutting down string formatter!")
-		return
+		fmt.Println()
+		goto initial
 	default:
-		fmt.Println(`✗ Unknown command: `+fmt.Sprintf("%q",operation))
-
-
+		fmt.Println(`✗ Unknown command: ` + fmt.Sprintf("%q", operation))
+		goto initial
 	}
-	
 
 }
 
-func main(){
+func main() {
 	formatter()
 }
