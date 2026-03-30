@@ -21,6 +21,8 @@ func formatter(){
 	var text string
 	if len(parts)==2{
 		text=parts[1]
+		words:=strings.Fields(text)
+		text=strings.Join(words, " ")
 	}
 	if len(parts)!=2{
 		fmt.Println("✗ No text provided. Usage: "+operation+ " <text>")
