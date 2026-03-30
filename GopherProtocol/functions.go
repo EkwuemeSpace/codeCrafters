@@ -47,7 +47,20 @@ func snakeCase(s string) string {
 
 }
 
-func reverser(s string) string {
+func All_letter(input string)bool{
+	for _, char:=range input{
+		if !unicode.IsLetter(char){
+			return false
+		}
+		
+	}
+	return true
+
+}
+
+
+func reverseSentence(s string) string {
+	reverse:=func(s string) string {
 	r := []rune(strings.TrimSpace(s))
 
 	for i, j := 0, len(r)-1; i < j; i, j = i+1, j-1 {
@@ -55,12 +68,11 @@ func reverser(s string) string {
 	}
 	return string(r)
 }
-
-func reverseSentence(s string) string {
 	words := strings.Fields(s)
 
 	for i := 0; i < len(words)-1; i++ {
-		words[i] = reverser(words[i])
+		words[i] = reverse(words[i])
 	}
 	return strings.Join(words, " ")
 }
+
